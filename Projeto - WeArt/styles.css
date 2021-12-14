@@ -5,8 +5,13 @@
 }
 .nav-list{
     text-decoration: none;
-    
+
 }
 .nav-link{
     font-size:large;
+}
+.inicial{
+    text-align: center;
+    margin-bottom:  20px;
+    margin-top:  20px;
 }
