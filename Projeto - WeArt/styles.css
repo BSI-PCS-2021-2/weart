@@ -1,0 +1,12 @@
+.nav{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.nav-list{
+    text-decoration: none;
+    
+}
+.nav-link{
+    font-size:large;
+}
