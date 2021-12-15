@@ -51,8 +51,8 @@
     margin-top: 5%;
     transform: translate(-50%);
     border: 2px solid black;
-    height: 700px;
-    width: 1200px;
+    height: 100%;
+    width: 80%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -60,6 +60,7 @@
 }
 .loginText{
     text-align: center;
+    margin-bottom:  5%;
 }
 .inputs{
     display: flex;
@@ -70,6 +71,8 @@
 }
 .buttons{
     text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 .inputLoginText{
     display: flex;
