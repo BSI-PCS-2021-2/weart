@@ -1,4 +1,4 @@
-class Profissinal extends Client{
+class Profissional extends Cliente{
     constructor() {
         super();
     }
