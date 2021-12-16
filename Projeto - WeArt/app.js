@@ -22,13 +22,9 @@ app.use('/autenticacao', autenticacaoRouter);
 app.use('/cadastro', cadastroRouter);
 app.use('/validacao', validacaoRouter);
 
-var sqlp = dbsql.selectclientes();
-sqlp.then(sql => {
-
-})
 
   app.get('/data', (req, res) => {
-    var sqlp = dbsql.selectclientes();
+    var sqlp = dbsql.selectclientesJoinProf();
     sqlp.then(sql => {
         res.send(sql)
 

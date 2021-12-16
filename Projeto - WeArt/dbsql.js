@@ -15,6 +15,12 @@ async function selectclientes(){
     return rows;
 }
 
+async function selectclientesJoinProf(){
+    const conn = await connect();
+    const [rows] = await conn.query('SELECT * FROM cliente JOIN cliente_profissional ON cliente.clienteid=cliente_profissional.clienteid;');
+    return rows;
+}
+
 async function checalogin(login, senha){
 
   var sql = 'SELECT * FROM cliente WHERE email =? AND senha= ?';
@@ -31,6 +37,16 @@ async function insertclientes(customer){
     return await conn.query(sql, values);
 }
 
+
+async function insertCliente_profissional(customer){
+    const conn = await connect();
+    const sql = 'INSERT INTO cliente_profissional(clienteid,tipoArte,infoBancarias) VALUES (?,?,?);';
+    const values = [customer.clienteid, customer.tipoArte, customer.infoBancarias];
+    return await conn.query(sql, values);
+}
+
+
+
 async function updateclientes(clienteid, customer){
     const conn = await connect();
     const sql = 'UPDATE cliente SET idade=?, email=?, nome=?,infoCartão=?,endereçoCompra=?,telefone=?,senha=? WHERE clienteid=?';
@@ -45,4 +61,4 @@ async function deleteclientes(clienteid){
     return await conn.query(sql, [clienteid]);
 }
 
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf}
