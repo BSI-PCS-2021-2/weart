@@ -15,7 +15,14 @@ async function selectclientes(){
     return rows;
 }
 
+async function checalogin(login, senha){
 
+  var sql = 'SELECT * FROM cliente WHERE email =? AND senha= ?';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [ login, senha ], function(err, rows, fields) {});
+    return rows;
+}
 
 async function insertclientes(customer){
     const conn = await connect();
@@ -26,8 +33,8 @@ async function insertclientes(customer){
 
 async function updateclientes(clienteid, customer){
     const conn = await connect();
-    const sql = 'UPDATE cliente SET idade=?, email=?, nome=?,infoCartão=?,endereçoCompra=?,telefone=? WHERE clienteid=?';
-    const values = [customer.idade, customer.email, customer.nome,customer.infoCartão,customer.endereçoCompra,customer.telefone, clienteid];
+    const sql = 'UPDATE cliente SET idade=?, email=?, nome=?,infoCartão=?,endereçoCompra=?,telefone=?,senha=? WHERE clienteid=?';
+    const values = [customer.idade, customer.email, customer.nome,customer.infoCartão,customer.endereçoCompra,customer.telefone,customer.senha, clienteid];
     return await conn.query(sql, values);
 }
 
@@ -38,4 +45,4 @@ async function deleteclientes(clienteid){
     return await conn.query(sql, [clienteid]);
 }
 
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin}

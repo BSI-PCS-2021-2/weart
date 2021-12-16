@@ -10,20 +10,44 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
     $(document).ready(function() {
+
+
           $.get('/data', function(res) {
 console.log(res.length);
 for(var i = 0; i < res.length; i++)
 {
 console.log(i);
-document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"><i class="+"arrow"+"></i></button><img src="+"\"http://localhost:3000/images/brand.jpg\""+"class="+"imagem><button class="+"\"arrowButton right\""+"><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nome+"</div></div></div>"
+document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"onclick="+"esquerda("+i+")"+"><i class="+"arrow"+"></i></button><img src="+"\"http://localhost:3000/images/brand.jpg\""+"class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nome+"</div></div></div>"
 }
-$('span').html(res[1].nome)
+
           })
           });
+
+i = 0;
+function esquerda(indice) {
+var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:3000/images/arte1.jpg', 'http://localhost:3000/images/arte2.jpg'];
+              if(i<=0){i=img_array.length}
+              i--;
+              document.getElementById("i"+indice).src = img_array[i];
+              if (i == 0) {
+                  i = img_array.length;}
+          }
+function direita(indice) {
+var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:3000/images/arte1.jpg', 'http://localhost:3000/images/arte2.jpg'];
+                        if(i>=img_array.length-1){i=-1}
+                        i++;
+                        document.getElementById("i"+indice).src = img_array[i];
+                        if (i == img_array.length - 1) {
+                            i = -1;}
+                    }
+
        </script>
     <title>Página Inicial</title>
 </head>
 <body>
+
+
+
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -61,7 +85,7 @@ $('span').html(res[1].nome)
       </div>
     </div>
 
-    <p>nome do cara: <strong><span></span><strong></p>
+
 
 
 
