@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var bodyParser = require('body-parser')
-const dbsql = require("../dbsql");
+const dbsql = require("../bd/dbsql");
 const url = require('url');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
  id= url.parse(req.url,true).query
-res.sendFile(path.join(__dirname, '/../', 'validacao.html'))
+res.sendFile(path.join(__dirname, '/../views/', 'validacao.html'))
 
 });
 

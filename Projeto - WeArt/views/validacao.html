@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="http://localhost:3000/css/styles.css" rel="stylesheet">
+    <title>Cadastro</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="http://localhost:3000/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">WeArts
+                </a>
+                <div class="" id="navbarNavAltMarkup">
+                    <nav class="nav nav-fill">
+                        <a class="nav-link" href="http://localhost:3000/">Explorar</a>
+                        <a class="nav-link" href="http://localhost:3000/autenticacao">Login</a>
+                        <a class="nav-link" href="http://localhost:3000/cadastro">Cadastro</a>
+                        <a class="nav-link" href="http://localhost:3000/portfolio">Portfólio</a>
+                        <a class="nav-link" href="http://localhost:3000/compras">Compras</a>
+                        <a class="nav-link" href="http://localhost:3000/vendas">Vendas</a>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="containerExternoLogin  ">
+
+        <div class="loginText "><h1 class="display-6">Avaliação do artista</h1></div>
+        <div>
+        <form action="/validacao/envio" method='post' class="row g-3  justify-content-center">
+
+
+            <div class="mb-3">
+      <label for="formFile" class="form-label">Insira aqui o arquivo do projeto</label>
+      <input class="form-control" type="file" id="formFile">
+        </div>
+
+        <div class="mb-2 form row justify-content-center">
+          <label for="inputend" class="col-sm-2 col-form-label">Tipo de Arte</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputend" placeholder="Tipo de Arte" name="tipoArte">
+          </div>
+        </div>
+        <div class="mb-2 form row justify-content-center">
+          <label for="inputend" class="col-sm-2 col-form-label">informações Bancarias</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputend" placeholder="informações Bancarias" name="infoBancarias">
+          </div>
+        </div>
+
+
+
+            <div class="mb-2 form row justify-content-center">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary buttons">Enviar</button>
+              </div>
+            </div>
+        </form>
+
+    </div>
+    </div>
+</body>

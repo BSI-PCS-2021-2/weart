@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var bodyParser = require('body-parser')
-const dbsql = require("../dbsql");
+const dbsql = require("../bd/dbsql");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
   console.log()
-res.sendFile(path.join(__dirname, '/../', 'cadastro.html'))
+res.sendFile(path.join(__dirname, '/../views/', 'cadastro.html'))
 });
 router.post('/envio', function(req, res, next) {
 if(req.body.idade!="" && req.body.Email!="" && req.body.nome!="" && req.body.infoCartão!="" && req.body.endereço!="" && req.body.tel!="" && req.body.Senha!=""){

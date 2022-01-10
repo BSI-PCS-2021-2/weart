@@ -4,14 +4,34 @@ var indexRouter = require('./routes/index');
 var autenticacaoRouter = require('./routes/autenticacao');
 var cadastroRouter = require('./routes/cadastro');
 var validacaoRouter = require('./routes/validacao');
-
+var vendasRouter = require('./routes/vendas');
+const passport = require("passport");
 var app = express();
 
-const dbsql = require("./dbsql");
+const dbsql = require("./bd/dbsql");
 
 var bodyParser = require('body-parser')
+var session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+const Sequelize = require('sequelize');
 
 
+require('./config/auten')(passport);
+app.use(session({
+  store: new MySQLStore({
+    host: "localhost",
+    port: "3306",
+    user: "root",
+    password: "Kevinbd1999",
+    database: "base1"
+  }),
+  secret: "senhadoblg4321",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 30 * 60 * 1000 }//30min
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(express.static('public'));
@@ -21,6 +41,7 @@ app.use('/', indexRouter);
 app.use('/autenticacao', autenticacaoRouter);
 app.use('/cadastro', cadastroRouter);
 app.use('/validacao', validacaoRouter);
+app.use('/vendas', vendasRouter);
 
 
   app.get('/data', (req, res) => {
@@ -31,7 +52,11 @@ app.use('/validacao', validacaoRouter);
     })
   });
 
+  app.get('/sessao', (req, res) => {
+    console.log(req.session.passport.user)
+    res.send(req.session.passport.user)
 
+  });
 
 
 app.listen(3000, function(){});
