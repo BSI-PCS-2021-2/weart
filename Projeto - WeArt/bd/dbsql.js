@@ -33,7 +33,7 @@ async function checalogin(login, senha){
 
 async function checacompras(id){
 
-  var sql = 'SELECT * FROM servico WHERE clienteid =?';
+  var sql = 'SELECT *,(SELECT cliente_profissional.nomeArtistico FROM cliente_profissional WHERE cliente_profissional.profid=servico.profid) AS nomeArtístico FROM servico WHERE clienteid =?';
 
     const conn = await connect();
     const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
@@ -42,7 +42,7 @@ async function checacompras(id){
 
 async function checavendas(id){
 
-  var sql = 'SELECT * FROM servico WHERE profid =(SELECT profid FROM cliente_profissional WHERE clienteid =?)';
+  var sql = 'SELECT *,(SELECT cliente.nome FROM cliente WHERE cliente.clienteid=servico.clienteid) AS nomeCliente FROM servico WHERE profid =(SELECT profid FROM cliente_profissional WHERE clienteid =?)';
 
     const conn = await connect();
     const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
@@ -83,8 +83,8 @@ async function insertclientes(customer){
 
 async function insertCliente_profissional(customer){
     const conn = await connect();
-    const sql = 'INSERT INTO cliente_profissional(clienteid,tipoArte,infoBancarias) VALUES (?,?,?);';
-    const values = [customer.clienteid, customer.tipoArte, customer.infoBancarias];
+    const sql = 'INSERT INTO cliente_profissional(clienteid,tipoArte,infoBancarias,nomeArtistico) VALUES (?,?,?,?);';
+    const values = [customer.clienteid, customer.tipoArte, customer.infoBancarias, customer.nomeArtistico];
     return await conn.query(sql, values);
 }
 

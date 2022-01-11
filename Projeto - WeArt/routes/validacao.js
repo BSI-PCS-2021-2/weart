@@ -18,7 +18,7 @@ router.post('/envio', function(req, res, next) {
 
   if(req.body.tipoArte!="" && req.body.infoBancarias!=""){
     console.log(id.id)
-    dbsql.insertCliente_profissional({clienteid: id.id,tipoArte: req.body.tipoArte,infoBancarias: req.body.infoBancarias})
+    dbsql.insertCliente_profissional({clienteid: id.id,tipoArte: req.body.tipoArte,infoBancarias: req.body.infoBancarias,nomeArtistico: req.body.nomeArtistico})
     res.redirect("http://localhost:3000/")
   }
 

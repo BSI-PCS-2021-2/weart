@@ -5,6 +5,7 @@ var autenticacaoRouter = require('./routes/autenticacao');
 var cadastroRouter = require('./routes/cadastro');
 var validacaoRouter = require('./routes/validacao');
 var vendasRouter = require('./routes/vendas');
+var comprasRouter = require('./routes/compras');
 const passport = require("passport");
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/autenticacao', autenticacaoRouter);
 app.use('/cadastro', cadastroRouter);
 app.use('/validacao', validacaoRouter);
 app.use('/vendas', vendasRouter);
+app.use('/compras', comprasRouter);
 
 
   app.get('/data', (req, res) => {
