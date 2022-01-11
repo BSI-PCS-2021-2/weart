@@ -21,15 +21,15 @@ passport.authenticate("local",{
 
 });
 
-router.post('/logout', function(req, res, next) {
+router.get('/logout', function(req, res, next) {
 req.logout();
-req.flash('sucess_mg', "deslogado com ");
-req.redirect("/");
+res.redirect("/");
 });
 
 
+router.get('/log', function(req, res, next) {
 
-
+});
 
 
 module.exports = router;

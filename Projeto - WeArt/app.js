@@ -52,6 +52,25 @@ app.use('/vendas', vendasRouter);
     })
   });
 
+
+  app.get('/datac', (req, res) => {
+    var sqlp = dbsql.checacompras(req.session.passport.user[0].clienteid);
+    sqlp.then(sql => {
+        res.send(sql)
+
+    })
+  });
+
+  app.get('/datav', (req, res) => {
+    var sqlp = dbsql.checavendas(req.session.passport.user[0].clienteid);
+    sqlp.then(sql => {
+        res.send(sql)
+
+    })
+  });
+
+
+
   app.get('/sessao', (req, res) => {
     console.log(req.session.passport.user)
     res.send(req.session.passport.user)

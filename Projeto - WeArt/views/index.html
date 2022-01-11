@@ -10,13 +10,22 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
     $(document).ready(function() {
+      $.get('/sessao', function(res) {
+console.log(res.length)
+if(res.length>0){
+document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
+document.getElementById("login").outerHTML = "";
+document.getElementById("cadastro").outerHTML = "";
+}
 
+
+      })
 
           $.get('/data', function(res) {
-console.log(res.length);
+
 for(var i = 0; i < res.length; i++)
 {
-console.log(i);
+
 
 document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"onclick="+"esquerda("+i+")"+"><i class="+"arrow"+"></i></button><img src="+"\"http://localhost:3000/images/brand.jpg\""+"class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nome+"</div></div></div>"
 }
@@ -56,13 +65,10 @@ var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:300
             <img src="http://localhost:3000/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">WeArts
           </a>
           <div class="" id="navbarNavAltMarkup">
-            <nav class="nav nav-fill">
+            <nav class="nav nav-fill" id="links">
               <a class="nav-link" href="http://localhost:3000/">Explorar</a>
-              <a class="nav-link" href="http://localhost:3000/autenticacao">Login</a>
-              <a class="nav-link" href="http://localhost:3000/cadastro">Cadastro</a>
-              <a class="nav-link" href="http://localhost:3000/portfolio">Portfólio</a>
-              <a class="nav-link" href="http://localhost:3000/compras">Compras</a>
-              <a class="nav-link" href="http://localhost:3000/vendas">Vendas</a>
+              <a class="nav-link" href="http://localhost:3000/autenticacao" id="login">Login</a>
+              <a class="nav-link" href="http://localhost:3000/cadastro" id="cadastro">Cadastro</a>
             </nav>
           </div>
         </div>
@@ -82,7 +88,7 @@ var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:300
 
 
         </div>
-      
+
       </div>
     </div>
 
