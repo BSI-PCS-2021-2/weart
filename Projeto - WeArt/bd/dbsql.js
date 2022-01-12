@@ -33,12 +33,26 @@ async function checalogin(login, senha){
 
 async function checacompras(id){
 
-  var sql = 'SELECT *,(SELECT cliente_profissional.nomeArtistico FROM cliente_profissional WHERE cliente_profissional.profid=servico.profid) AS nomeArtístico FROM servico WHERE clienteid =?';
+  var sql = 'SELECT *,(SELECT cliente_profissional.nomeArtistico FROM cliente_profissional WHERE cliente_profissional.profid=servico.profid) AS nomeArtístico FROM servico WHERE clienteid =? ';
 
     const conn = await connect();
     const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
     return rows;
 }
+
+
+async function checacomprasterminada(id, numServiço){
+
+  var sql = 'SELECT *,(SELECT cliente_profissional.nomeArtistico FROM cliente_profissional WHERE cliente_profissional.profid=servico.profid) AS nomeArtístico FROM servico WHERE clienteid =? and numServiço=? ';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [id,numServiço], function(err, rows, fields) {});
+    return rows;
+}
+
+
+
+
 
 async function checavendas(id){
 
@@ -104,4 +118,4 @@ async function deleteclientes(clienteid){
     return await conn.query(sql, [clienteid]);
 }
 
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada}

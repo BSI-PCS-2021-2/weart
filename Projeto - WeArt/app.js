@@ -6,6 +6,10 @@ var cadastroRouter = require('./routes/cadastro');
 var validacaoRouter = require('./routes/validacao');
 var vendasRouter = require('./routes/vendas');
 var comprasRouter = require('./routes/compras');
+var portfolioRouter = require('./routes/portfolio');
+var visualizarRouter = require('./routes/visualizar');
+
+
 const passport = require("passport");
 var app = express();
 
@@ -44,7 +48,8 @@ app.use('/cadastro', cadastroRouter);
 app.use('/validacao', validacaoRouter);
 app.use('/vendas', vendasRouter);
 app.use('/compras', comprasRouter);
-
+app.use('/portfolio', portfolioRouter);
+app.use('/visualizar', visualizarRouter);
 
   app.get('/data', (req, res) => {
     var sqlp = dbsql.selectclientesJoinProf();

@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   console.log()
 res.sendFile(path.join(__dirname, '/../views/', 'cadastro.html'))
 });
+
 router.post('/envio', function(req, res, next) {
 if(req.body.idade!="" && req.body.Email!="" && req.body.nome!="" && req.body.infoCartão!="" && req.body.endereço!="" && req.body.tel!="" && req.body.Senha!=""){
     console.log("foi")
