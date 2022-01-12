@@ -8,10 +8,13 @@ const dbsql = require("../bd/dbsql");
 
 
 router.post('/', function(req, res, next) {
-  var sqlp = dbsql.checacomprasterminada(req.session.passport.user[0].clienteid,req.body.numero);
+  var iduser= req.session.passport.user[0].clienteid;
+  var nserviço= req.body.numero;
+  router.get('/dados', (req, res) => {
+  var sqlp = dbsql.checacomprasterminada(iduser,nserviço);
   sqlp.then(sql => {
     console.log(sql)
-    router.get('/dados', (req, res) => {
+
       res.send(sql)
         })
   })
@@ -19,4 +22,53 @@ res.sendFile(path.join(__dirname, '/../views/', 'visualizar.html'))
 
 
 });
+
+
+router.post('/revisao', function(req, res, next) {
+
+
+  var sqlp = dbsql.insererevisao(req.body.numServiço,req.body.textarea);
+  sqlp.then(sql => {
+
+      console.log(sql)
+       })
+
+      var sqlp2 = dbsql.diminuirevisao(req.body.numServiço);
+      sqlp2.then(sql2 => {
+
+          console.log(sql2)
+           })
+
+
+
+
+      res.redirect("http://localhost:3000/")
+  })
+
+
+
+
+
+
+
+router.post('/avaliacao', function(req, res, next) {
+  console.log(req.body);
+  var sqlp = dbsql.insereavaliacao(req.body.numServiço,req.body.comentario,req.body.rating);
+ sqlp.then(sql => {
+
+      console.log(sql)
+       })
+  var sqlp2 = dbsql.finalizaservico(req.body.numServiço);
+  sqlp2.then(sql2 => {
+
+           console.log(sql2)
+            })
+
+
+       res.redirect("http://localhost:3000/")
+  })
+
+
+
+
 module.exports = router;

@@ -23,8 +23,15 @@
     }
     })
     $.get('visualizar/dados', function(res) {
-      console.log(res);
+        console.log(res);
 
+      document.getElementById("numServiço").innerHTML+="<input type=\"hidden\" id=\"numServiço\" name=\"numServiço\" value=\"" + res[0].numServiço + "\">"
+      document.getElementById("numServiço2").innerHTML+="<input type=\"hidden\" id=\"numServiço\" name=\"numServiço\" value=\"" + res[0].numServiço + "\">"
+    document.getElementById("revis").innerHTML+=res[0].numRevisões;
+    if(res[0].numRevisões!=0){
+      document.getElementById("revb").innerHTML+="<button type=\"button\" class=\"btn btn-secondary btn-lm \" data-bs-toggle=\"modal\" data-bs-target=\"#revisao\" data-bs-whatever=\"@mdo\">fazer revisão</i></button>";
+    }
+  
   })
 });
     </script>
@@ -58,12 +65,17 @@
 
 
           <div class="d-grid gap-2">
+            <div class=" justify-content-center">
+            Quantidade de Revisões disponíveis: <span id="revis"></span>
+            </div>
+
+
         <div class=" justify-content-center">
         <button type="submit" class="btn btn-secondary btn-lm">Baixar</button>
         </div>
 
-        <div class=" justify-content-center">
-        <button type="button" class="btn btn-secondary btn-lm " data-bs-toggle="modal" data-bs-target="#revisao" data-bs-whatever="@mdo">fazer revisão</i></button>
+        <div class=" justify-content-center" id="revb">
+
         </div>
 
 
@@ -88,10 +100,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form action="/portfolio/envio" method="post" id="form" enctype="multipart/form-data">
+                    <form action="/visualizar/revisao" method="post" id="form">
+                      <div id="numServiço2"></div>
                       <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">detalhes do pedido:</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="textarea" name="textarea" rows="3"></textarea>
                       </div>
 
                       </div>
@@ -112,12 +125,13 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="/portfolio/envio" method="post" id="form" enctype="multipart/form-data">
+                      <form action="/visualizar/avaliacao" method="post" id="form" >
 
-                        <div class="mb-3">
+                          <div id="numServiço"></div>
+
                           <div class= "justify-content-center">
-                          <label for="recipient-name" class="col-form-label">Avaliação</label>
-                          <fieldset class="rating" id="nota">
+                          <label for="recipient-name" class="col-form-label" >Avaliação</label>
+                          <fieldset class="rating" id="nota" name="nota">
                             <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
                             <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
                             <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
@@ -130,22 +144,12 @@
                             <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
                             <input type="radio" class="reset-option" name="rating" value="reset" /> </fieldset>
                             </div>
-                        </div>
+
 
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">escreva um comentário:</label>
-                          <textarea class="form-control" id="comentario" rows="3"></textarea>
+                          <textarea class="form-control"  name="comentario" id="comentario" rows="3"></textarea>
                         </div>
-
-
-
-
-
-
-
-
-
-
 
                         </div>
                         <button type="submit" class="btn btn-primary buttons">Enviar</button>

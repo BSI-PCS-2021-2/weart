@@ -8,9 +8,6 @@ res.sendFile(path.join(__dirname, '/../views/', 'compras.html'))
 });
 
 
-router.post('/', function(req, res, next) {
-console.log(req.body.numero)
 
-res.sendFile(path.join(__dirname, '/../views/', 'visualizar.html'))
-});
+
 module.exports = router;

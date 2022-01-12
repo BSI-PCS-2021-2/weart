@@ -86,6 +86,43 @@ async function checaclienteid(id){
 
 
 
+async function insererevisao(numServiço,revisão){
+
+  var sql = 'INSERT INTO revisão(numServiço,revisão) VALUES (?,?)';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [numServiço,revisão], function(err, rows, fields) {});
+    return rows;
+}
+
+async function insereavaliacao(numServiço,avaliaçao,nota){
+
+  var sql = 'INSERT INTO avalia(numServiço,avaliaçao,nota) VALUES (?,?,?)';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [numServiço,avaliaçao,nota], function(err, rows, fields) {});
+    return rows;
+}
+
+async function diminuirevisao(numServiço){
+
+  var sql = 'UPDATE servico SET numRevisões=numRevisões-1 WHERE numServiço=?';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [numServiço], function(err, rows, fields) {});
+    return rows;
+}
+
+async function finalizaservico(numServiço){
+
+  var sql = 'UPDATE servico SET statusServiço="finalizado" WHERE numServiço=?';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [numServiço], function(err, rows, fields) {});
+    return rows;
+}
+
+
 
 async function insertclientes(customer){
     const conn = await connect();
@@ -118,4 +155,4 @@ async function deleteclientes(clienteid){
     return await conn.query(sql, [clienteid]);
 }
 
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico}

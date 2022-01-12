@@ -9,6 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="http://localhost:3000/css/styles.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+
+    <!-- Progress Bar -->
+
+    <!-- Parallax -->
+
+
+
     <script>
 
     function addfile(){
@@ -53,40 +63,93 @@ document.getElementById("cadastro").outerHTML = "";
 
 
 
-      <div class="row" >
-    <div class="container-sm col">
-    <div class="container-sm col-sm-4 col-md-12">  <div class="p-3 border bg-light inicial"><h1>Nome do artista</h1></div></div>
-    </div>
 
-    </div>
+
+    <div class="container-sm ">  <div class="p-3 border bg-light inicial"><h1>Nome do artista</h1></div></div>
+
+<form action="/portfolio/envio" method="post" id="portfolio" >
     <div class="container-sm">
-<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2" id="teste">
-<div>
-
-    <div class="card" style="width: 18rem;">
-      <img src="http://localhost:3000/uploads/vilac.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-      </div>
+      <div class="col-9"><div class="p-3 border bg-light inicial"><textarea class="form-control"  placeholder="Descrição" id="descricao" rows="3"></textarea></div></div>
     </div>
-</div>
 
-<div>
-  <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-    <div class="card" style="width: 18rem;">
-      <img src="http://localhost:3000/uploads/vilac.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+    <div class="container ">
+    <div class="row ">
+      <div class="col-2">
+       <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 1" name="preco1"></div>
+      </div>
+      <div class="col-2">
+        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 2" name="preco1"></div>
+      </div>
+      <div class="col-2">
+        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 3" name="preco1"></div>
       </div>
     </div>
   </div>
+</form>
+
+
+    <div class="container-sm">
+
+
+
+<div class="row " id="teste">
+
+
+
+
+
+
+
+
+
+  <div class="container-sm ">
+  <div class="container"    >
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div>
+        <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+          <div class="card"  >
+            <img src="http://localhost:3000/uploads/vilac.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
+        </div>
+          </div>
     </div>
+    <div class="carousel-item">
+      <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+        <div class="card" >
+          <img src="http://localhost:3000/uploads/FIWZ4xgXEAIi4Hk.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+        <div class="card" >
+          <img src="http://localhost:3000/uploads/FIWZ4xgXEAIi4Hk.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Próximo</span>
+  </a>
 </div>
 </div>
-
-
-
-
+</div>
 <div class="container-sm">
 
 <button type="button" class="btn btn-secondary btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-plus-square-fill fa-7x"> adicionar novo projeto</i></button>
@@ -124,9 +187,7 @@ document.getElementById("cadastro").outerHTML = "";
 
 
 </div>
-    <div class="container-sm">
-      <div class="col-9"><div class="p-3 border bg-light inicial"><textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div></div>
-    </div>
+
 
 
 
