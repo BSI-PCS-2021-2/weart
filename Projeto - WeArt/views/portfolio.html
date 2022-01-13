@@ -36,20 +36,20 @@ document.getElementById("cadastro").outerHTML = "";
 })
 
 $.get('/prof', function(res) {
-  console.log(res)
+
   document.getElementById("inserir").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res[0].profid+">";
 
 })
 
 $.get('/dataprojeto', function(res) {
-  console.log(res)
+
 document.getElementById("inserir").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res[0].profid+">";
 
 
 
 for(var i = 0; i < res.length; i++)
 {
-  console.log(res)
+
   array2=res[i].imagens.split(" ");
   array2.pop();
   img_array.push(array2)
@@ -70,20 +70,19 @@ document.getElementById("teste").innerHTML+="<div class=\"col\"><div class=\"car
 i = 0;
 function esquerda(indice) {
 
-console.log(i=img_array[indice].length);
-console.log(img_array[indice][i]);
-              if(i<=0){i=img_array[indice].length}
-              i--;
-              document.getElementById("i"+indice).src =  img_array[indice][i];
-              if (i == 0) {
-                  i = img_array[indice].length;}
+
+if(i<=0){i=img_array[indice].length}
+i--;
+document.getElementById("i"+indice).src =  img_array[indice][i];
+if (i == 0) {
+    i = img_array[indice].length;}
           }
+
 function direita(indice) {
-  console.log(i);
-  console.log(i);
-                        if(i>=img_array[indice].length-1){i=-1}
-                        i++;
-                        document.getElementById("i"+indice).src =  img_array[indice][i];
+
+  if(i>=img_array[indice].length-1){i=-1}
+  i++;
+  document.getElementById("i"+indice).src =  img_array[indice][i];
 
                     }
 

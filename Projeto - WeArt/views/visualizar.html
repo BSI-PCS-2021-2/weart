@@ -23,7 +23,7 @@
     }
     })
     $.get('visualizar/dados', function(res) {
-        console.log(res);
+    
 
       document.getElementById("numServiço").innerHTML+="<input type=\"hidden\" id=\"numServiço\" name=\"numServiço\" value=\"" + res[0].numServiço + "\">"
       document.getElementById("numServiço2").innerHTML+="<input type=\"hidden\" id=\"numServiço\" name=\"numServiço\" value=\"" + res[0].numServiço + "\">"
@@ -31,7 +31,7 @@
     if(res[0].numRevisões!=0){
       document.getElementById("revb").innerHTML+="<button type=\"button\" class=\"btn btn-secondary btn-lm \" data-bs-toggle=\"modal\" data-bs-target=\"#revisao\" data-bs-whatever=\"@mdo\">fazer revisão</i></button>";
     }
-  
+
   })
 });
     </script>

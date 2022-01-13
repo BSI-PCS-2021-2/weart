@@ -28,7 +28,7 @@ document.getElementById("cadastro").outerHTML = "";
       })
 
           $.get('/data', function(res) {
-console.log(res);
+
 for(var i = 0; i < res.length; i++)
 {
   if(res[i].imagens!=null){
@@ -52,8 +52,7 @@ document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class
           i = 0;
           function esquerda(indice) {
 
-          console.log( img_array);
-          console.log(img_array);
+
                         if(i<=0){i=img_array[indice].length}
                         i--;
                         document.getElementById("i"+indice).src =  img_array[indice][i];
@@ -61,8 +60,7 @@ document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class
                             i = img_array[indice].length;}
                     }
           function direita(indice) {
-            console.log( img_array);
-            console.log(  img_array);
+            
                                   if(i>=img_array[indice].length-1){i=-1}
                                   i++;
                                   document.getElementById("i"+indice).src =  img_array[indice][i];
