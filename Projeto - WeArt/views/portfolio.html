@@ -33,9 +33,28 @@ document.getElementById("login").outerHTML = "";
 document.getElementById("cadastro").outerHTML = "";
 }
 })
+
+
+
 });
 
-
+i = 0;
+function esquerda(indice) {
+var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:3000/images/arte1.jpg', 'http://localhost:3000/images/arte2.jpg'];
+              if(i<=0){i=img_array.length}
+              i--;
+              document.getElementById("i"+indice).src = img_array[i];
+              if (i == 0) {
+                  i = img_array.length;}
+          }
+function direita(indice) {
+var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:3000/images/arte1.jpg', 'http://localhost:3000/images/arte2.jpg'];
+                        if(i>=img_array.length-1){i=-1}
+                        i++;
+                        document.getElementById("i"+indice).src = img_array[i];
+                        if (i == img_array.length - 1) {
+                            i = -1;}
+                    }
 
        </script>
     <title>Página Inicial</title>
@@ -68,8 +87,9 @@ document.getElementById("cadastro").outerHTML = "";
     <div class="container-sm ">  <div class="p-3 border bg-light inicial"><h1>Nome do artista</h1></div></div>
 
 <form action="/portfolio/envio" method="post" id="portfolio" >
+
     <div class="container-sm">
-      <div class="col-9"><div class="p-3 border bg-light inicial"><textarea class="form-control"  placeholder="Descrição" id="descricao" rows="3"></textarea></div></div>
+      <div class="col-9"><div class="p-3 border bg-light inicial"><textarea class="form-control"  placeholder="Descrição" id="descricao" rows="4"></textarea></div></div>
     </div>
 
     <div class="container ">
@@ -83,34 +103,41 @@ document.getElementById("cadastro").outerHTML = "";
       <div class="col-2">
         <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 3" name="preco1"></div>
       </div>
+      <div class="col-2">
+        <button type="submit" class="btn btn-primary buttons">Enviar</button>
+      </div>
     </div>
   </div>
+
 </form>
 
 
-    <div class="container-sm">
 
+<div class="container">
 
-
-<div class="row " id="teste">
-
-
-
-
+<div class="container-sm "><div class="p-3 border bg-light inicial" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-plus-square-fill fa-7x"> adicionar novo projeto</i></div></div>
+</div>
 
 
 
 
 
-  <div class="container-sm ">
-  <div class="container"    >
+
+
+
+
+
+
+<div class="row">
+  <div class="container w-50 p-3 align-self-start">
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <div>
-        <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+        <div  class="" data-bs-toggle="modal" data-bs-target="#editar" data-bs-whatever="@mdo">
           <div class="card"  >
-            <img src="http://localhost:3000/uploads/vilac.jpg" class="card-img-top" alt="...">
+            <img src="http://localhost:3000/uploads/vilac.jpg"    class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
             </div>
@@ -119,19 +146,20 @@ document.getElementById("cadastro").outerHTML = "";
           </div>
     </div>
     <div class="carousel-item">
-      <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+
         <div class="card" >
-          <img src="http://localhost:3000/uploads/FIWZ4xgXEAIi4Hk.jpg" class="card-img-top" alt="...">
+          <div class="col"><div class="p-3 border bg-light innerImg\"><button class="arrowButton left" onclick=esquerda(1)><i class="arrow"></i></button><img src="http://localhost:3000/images/brand.jpg" class="imagem"  width="30" height="24" id="i1"><button class="arrowButton right" onclick="direita(1)"><i class="arrow"></i></button><div class="innerGridText">nome</div></div></div>
           <div class="card-body">
+            <div  class="" data-bs-toggle="modal" data-bs-target="#editar" data-bs-whatever="@mdo">
             <h5 class="card-title">Card title</h5>
           </div>
         </div>
       </div>
     </div>
     <div class="carousel-item">
-      <div  class="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+      <div  class="" data-bs-toggle="modal" data-bs-target="#editar" data-bs-whatever="@mdo">
         <div class="card" >
-          <img src="http://localhost:3000/uploads/FIWZ4xgXEAIi4Hk.jpg" class="card-img-top" alt="...">
+          <img src="http://localhost:3000/uploads/FIWZ4xgXEAIi4Hk.jpg"  class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
           </div>
@@ -149,11 +177,12 @@ document.getElementById("cadastro").outerHTML = "";
   </a>
 </div>
 </div>
-</div>
-<div class="container-sm">
 
-<button type="button" class="btn btn-secondary btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-plus-square-fill fa-7x"> adicionar novo projeto</i></button>
 </div>
+
+
+
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -179,6 +208,35 @@ document.getElementById("cadastro").outerHTML = "";
           <button type="submit" class="btn btn-primary buttons">Enviar</button>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+
+      <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">editar projeto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/portfolio/envio" method="post" id="form" enctype="multipart/form-data">
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Nome do projeto:</label>
+                  <input type="text" class="form-control" id="nome">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">data do projeto:</label>
+                  <input id="date" type="date" id="data">
+                </div>
+                <input class="form-control-lg" type="file" name="photos" />
+                <div id="mais">
+                </div>
+                <button type="button" class="btn btn-primary" onClick="addfile()">add</button>
+                <button type="submit" class="btn btn-primary buttons">Enviar</button>
+              </form>
+            </div>
 
     </div>
   </div>
@@ -186,17 +244,13 @@ document.getElementById("cadastro").outerHTML = "";
 
 
 
-</div>
 
 
 
 
-    <div class="container">
 
 
 
-      </div>
-    </div>
 
 
 
