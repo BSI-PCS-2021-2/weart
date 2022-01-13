@@ -52,7 +52,7 @@ app.use('/portfolio', portfolioRouter);
 app.use('/visualizar', visualizarRouter);
 
   app.get('/data', (req, res) => {
-    var sqlp = dbsql.selectclientesJoinProf();
+    var sqlp = dbsql.selectallprof();
     sqlp.then(sql => {
         res.send(sql)
 
@@ -77,9 +77,17 @@ app.use('/visualizar', visualizarRouter);
   });
 
 
+  app.get('/dataprojeto', (req, res) => {
+    var sqlp = dbsql.selectprojetobyid(req.session.passport.user[0].clienteid);
+    sqlp.then(sql => {
+        res.send(sql)
+
+    })
+  });
+
 
   app.get('/sessao', (req, res) => {
-    console.log(req.session.passport.user)
+
     res.send(req.session.passport.user)
 
   });

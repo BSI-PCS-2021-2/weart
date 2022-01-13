@@ -9,9 +9,15 @@
     <link href="http://localhost:3000/css/styles.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
+
+    img_array=[];
+
+
+
+
     $(document).ready(function() {
       $.get('/sessao', function(res) {
-console.log(res.length)
+
 if(res.length>0){
 document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
 document.getElementById("login").outerHTML = "";
@@ -22,34 +28,46 @@ document.getElementById("cadastro").outerHTML = "";
       })
 
           $.get('/data', function(res) {
-
+console.log(res);
 for(var i = 0; i < res.length; i++)
 {
+  if(res[i].imagens!=null){
 
 
-document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"onclick="+"esquerda("+i+")"+"><i class="+"arrow"+"></i></button><img src="+"\"http://localhost:3000/images/brand.jpg\""+"class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nome+"</div></div></div>"
+    array2=res[i].imagens.split(" ");
+    array2.pop();
+    img_array.push(array2)
+
+  }
+  else{img_array.push(["http://localhost:3000/images/brand.jpg"])}
+document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"onclick="+"esquerda("+i+")"+"><i class="+"arrow"+"></i></button><img src=\""+img_array[i][0]+"\"class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nomeArtistico+"</div></div></div>"
 }
+
+
+
 
           })
           });
 
-i = 0;
-function esquerda(indice) {
-var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:3000/images/arte1.jpg', 'http://localhost:3000/images/arte2.jpg'];
-              if(i<=0){i=img_array.length}
-              i--;
-              document.getElementById("i"+indice).src = img_array[i];
-              if (i == 0) {
-                  i = img_array.length;}
-          }
-function direita(indice) {
-var img_array = ['http://localhost:3000/images/brand.jpg', 'http://localhost:3000/images/arte1.jpg', 'http://localhost:3000/images/arte2.jpg'];
-                        if(i>=img_array.length-1){i=-1}
-                        i++;
-                        document.getElementById("i"+indice).src = img_array[i];
-                        if (i == img_array.length - 1) {
-                            i = -1;}
+          i = 0;
+          function esquerda(indice) {
+
+          console.log( img_array);
+          console.log(img_array);
+                        if(i<=0){i=img_array[indice].length}
+                        i--;
+                        document.getElementById("i"+indice).src =  img_array[indice][i];
+                        if (i == 0) {
+                            i = img_array[indice].length;}
                     }
+          function direita(indice) {
+            console.log( img_array);
+            console.log(  img_array);
+                                  if(i>=img_array[indice].length-1){i=-1}
+                                  i++;
+                                  document.getElementById("i"+indice).src =  img_array[indice][i];
+
+                              }
 
        </script>
     <title>Página Inicial</title>

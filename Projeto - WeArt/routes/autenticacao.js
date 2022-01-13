@@ -6,7 +6,7 @@ const dbsql = require("../bd/dbsql");
 const passport = require("passport");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log()
+
 res.sendFile(path.join(__dirname, '/../views/', 'autenticacao.html'))
 });
 

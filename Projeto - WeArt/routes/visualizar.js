@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
   router.get('/dados', (req, res) => {
   var sqlp = dbsql.checacomprasterminada(iduser,nserviço);
   sqlp.then(sql => {
-    console.log(sql)
+
 
       res.send(sql)
         })
@@ -52,7 +52,7 @@ router.post('/revisao', function(req, res, next) {
 
 
 router.post('/avaliacao', function(req, res, next) {
-  console.log(req.body);
+
   var sqlp = dbsql.insereavaliacao(req.body.numServiço,req.body.comentario,req.body.rating);
  sqlp.then(sql => {
 

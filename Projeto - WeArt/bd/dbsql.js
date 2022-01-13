@@ -21,6 +21,16 @@ async function selectclientesJoinProf(){
     return rows;
 }
 
+async function selectallprof(){
+    const conn = await connect();
+    const [rows] = await conn.query('SELECT *,(SELECT projeto.imagens FROM projeto WHERE projeto.profid=cliente_profissional.profid LIMIT 1) AS imagens FROM cliente_profissional;');
+    return rows;
+}
+
+
+
+
+
 async function checalogin(login, senha){
 
   var sql = 'SELECT * FROM cliente WHERE email =? AND senha= ?';
@@ -57,6 +67,15 @@ async function checacomprasterminada(id, numServiço){
 async function checavendas(id){
 
   var sql = 'SELECT *,(SELECT cliente.nome FROM cliente WHERE cliente.clienteid=servico.clienteid) AS nomeCliente FROM servico WHERE profid =(SELECT profid FROM cliente_profissional WHERE clienteid =?)';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
+    return rows;
+}
+
+async function selectprojetobyid(id){
+
+  var sql = 'SELECT * FROM cliente_profissional JOIN projeto ON projeto.profid=cliente_profissional.profid WHERE cliente_profissional.clienteid= ?';
 
     const conn = await connect();
     const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
@@ -130,7 +149,12 @@ async function insertclientes(customer){
     const values = [customer.idade, customer.email, customer.nome, customer.infoCartão, customer.endereçoCompra, customer.telefone, customer.senha];
     return await conn.query(sql, values);
 }
-
+async function insertprojeto(customer){
+    const conn = await connect();
+    const sql = 'INSERT INTO projeto(profid,nome,dataCriação,imagens) VALUES (?,?,?,?);';
+    const values = [customer.profid, customer.nome, customer.dataCriação, customer.imagens];
+    return await conn.query(sql, values);
+}
 
 async function insertCliente_profissional(customer){
     const conn = await connect();
@@ -154,5 +178,9 @@ async function deleteclientes(clienteid){
     const sql = 'DELETE FROM cliente where clienteid=?;';
     return await conn.query(sql, [clienteid]);
 }
-
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico}
+async function deleteprojeto(idProjeto){
+    const conn = await connect();
+    const sql = 'DELETE FROM projeto where idProjeto=?;';
+    return await conn.query(sql, [idProjeto]);
+}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof}

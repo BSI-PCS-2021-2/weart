@@ -30,6 +30,10 @@ router.post('/envio', function(req, res, next) {
 
 
       parser.array('photos', 12)(req, res, err => {
+
+        //insertprojeto
+        //data
+
           if (err)
               res.status(500).json({ error: 1, payload: err });
           else {
@@ -40,17 +44,31 @@ router.post('/envio', function(req, res, next) {
                 var imageid = req.files[i].filename;
                imageurl += `uploads/` +imageid+" ";
                     }
-              console.log("image.url: ");
-              console.log(imageurl);
 
-            //  console.log(image);
-              res.redirect("http://localhost:3000/")
+              var sqlp2 = dbsql.insertprojeto({profid: 3,nome: req.body.nome,data: req.body.data,imagens: imageurl});
+              sqlp2.then(sql2 => {
+
+                  console.log(sql2)
+                   })
+
+              res.redirect("http://localhost:3000/portfolio")
           }
       });
 
 
 
 
+});
+
+router.post('/deletar', function(req, res, next) {
+
+var sqlp2 = dbsql.deleteprojeto(req.body.del);
+sqlp2.then(sql2 => {
+
+    console.log(sql2)
+     })
+
+res.redirect("http://localhost:3000/portfolio")
 });
 
 module.exports = router;
