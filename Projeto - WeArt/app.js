@@ -91,6 +91,15 @@ app.use('/visualizar', visualizarRouter);
     res.send(req.session.passport.user)
 
   });
+  app.get('/prof', (req, res) => {
+
+    var sqlp = dbsql.selectclienteProfbiId(req.session.passport.user[0].clienteid);
+    sqlp.then(sql => {
+        res.send(sql)
+
+    })
+  });
+
 
 
 app.listen(3000, function(){});

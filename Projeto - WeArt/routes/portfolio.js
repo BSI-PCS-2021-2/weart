@@ -44,8 +44,8 @@ router.post('/envio', function(req, res, next) {
                 var imageid = req.files[i].filename;
                imageurl += `uploads/` +imageid+" ";
                     }
-
-              var sqlp2 = dbsql.insertprojeto({profid: 3,nome: req.body.nome,data: req.body.data,imagens: imageurl});
+console.log(req.body.profid)
+              var sqlp2 = dbsql.insertprojeto({profid: req.body.profid,nome: req.body.nome,data: req.body.data,imagens: imageurl});
               sqlp2.then(sql2 => {
 
                   console.log(sql2)

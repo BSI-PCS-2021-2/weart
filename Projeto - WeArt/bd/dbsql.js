@@ -15,6 +15,9 @@ async function selectclientes(){
     return rows;
 }
 
+
+
+
 async function selectclientesJoinProf(){
     const conn = await connect();
     const [rows] = await conn.query('SELECT * FROM cliente JOIN cliente_profissional ON cliente.clienteid=cliente_profissional.clienteid;');
@@ -44,6 +47,16 @@ async function checalogin(login, senha){
 async function checacompras(id){
 
   var sql = 'SELECT *,(SELECT cliente_profissional.nomeArtistico FROM cliente_profissional WHERE cliente_profissional.profid=servico.profid) AS nomeArtístico FROM servico WHERE clienteid =? ';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
+    return rows;
+}
+
+
+async function selectclienteProfbiId(id){
+
+  var sql = 'SELECT * FROM cliente_profissional WHERE cliente_profissional.clienteid=?';
 
     const conn = await connect();
     const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
@@ -183,4 +196,4 @@ async function deleteprojeto(idProjeto){
     const sql = 'DELETE FROM projeto where idProjeto=?;';
     return await conn.query(sql, [idProjeto]);
 }
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfbiId}
