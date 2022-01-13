@@ -2,28 +2,34 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var bodyParser = require('body-parser')
-const dbsql = require("../dbsql");
+const dbsql = require("../bd/dbsql");
+const passport = require("passport");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log()
-res.sendFile(path.join(__dirname, '/../', 'autenticacao.html'))
+
+res.sendFile(path.join(__dirname, '/../views/', 'autenticacao.html'))
 });
 
 
-router.post('/envio', function(req, res, next) {
-  if(req.body.Email!="" && req.body.Senha!=""){
-    console.log("ta indo meu amigo")
 
-  var sqlp =  dbsql.checalogin(req.body.Email,req.body.Senha)
-  sqlp.then(sql => {
-  console.log(sql)
-  console.log(sql.length)
-  if(sql.length>=1){res.redirect("http://localhost:3000/")}
-  else{  res.redirect("http://localhost:3000/autenticacao")}
-  })
-}
-else{res.redirect("http://localhost:3000/autenticacao")}
+router.post('/envio2', function(req, res, next) {
+passport.authenticate("local",{
+  successRedirect:"/",
+  failureRedirect:"/autenticacao",
+  failureFlash: true
+})(req, res, next)
 
 });
+
+router.get('/logout', function(req, res, next) {
+req.logout();
+res.redirect("/");
+});
+
+
+router.get('/log', function(req, res, next) {
+
+});
+
 
 module.exports = router;
