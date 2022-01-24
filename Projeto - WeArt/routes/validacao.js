@@ -17,8 +17,14 @@ router.post('/envio', function(req, res, next) {
 
 
   if(req.body.tipoArte!="" && req.body.infoBancarias!=""){
-  
-    dbsql.insertCliente_profissional({clienteid: id.id,tipoArte: req.body.tipoArte,infoBancarias: req.body.infoBancarias,nomeArtistico: req.body.nomeArtistico})
+    var inserta= dbsql.insertCliente_profissional({clienteid: id.id,tipoArte: req.body.tipoArte,infoBancarias: req.body.infoBancarias,nomeArtistico: req.body.nomeArtistico})
+
+    inserta.then(inser => {
+    dbsql.insertportfolio(inser[0].insertId)
+    })
+
+
+
     res.redirect("http://localhost:3000/")
   }
 

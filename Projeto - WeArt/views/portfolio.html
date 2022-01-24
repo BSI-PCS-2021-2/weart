@@ -38,27 +38,28 @@ document.getElementById("cadastro").outerHTML = "";
 $.get('/prof', function(res) {
 
   document.getElementById("inserir").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res[0].profid+">";
-
+  document.getElementById("inserir2").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res[0].profid+">";
 })
 
 $.get('/dataprojeto', function(res) {
 
-document.getElementById("inserir").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res[0].profid+">";
 
 
 
-for(var i = 0; i < res.length; i++)
-{
 
-  array2=res[i].imagens.split(" ");
-  array2.pop();
-  img_array.push(array2)
+  for(var i = 0; i < res.length; i++)
+  {
+
+    array2=res[i].imagens.split(" ");
+    array2.pop();
+    img_array.push(array2)
 
 
 
-document.getElementById("teste").innerHTML+="<div class=\"col\"><div class=\"card\"><div class=\"p-3 border bg-light innerImg\"><button class=\"arrowButton left\" onclick=\"esquerda("+ i +")\"><i class=\"arrow\"></i></button><img src="+"\""+img_array[i][0]+"\""+
-"class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+"><div class=\"card-body\"><h5 class=\"card-title\">Nome do projeto: <br>"+res[i].nome+"<\h5></div></div><form action=\"/portfolio/deletar\" method=\"post\" id=\"form\"><input type=\"hidden\" id=\"del\" name=\"del\" value=\" "+res[i].idProjeto+"   \"><button type=\"submit\" class=\"btn btn-primary buttons\">Deletar</button></form></div></div></div>"
-}
+  document.getElementById("teste").innerHTML+="<div class=\"col\"><div class=\"card\"><div class=\"p-3 border bg-light innerImg\"><button class=\"arrowButton left\" onclick=\"esquerda("+ i +")\"><i class=\"arrow\"></i></button><img src="+"\""+img_array[i][0]+"\""+
+  "class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+"><div class=\"card-body\"><h5 class=\"card-title\">Nome do projeto: <br>"+res[i].nome+"<\h5></div></div><form action=\"/portfolio/deletar\" method=\"post\" id=\"form\"><input type=\"hidden\" id=\"del\" name=\"del\" value=\" "+res[i].idProjeto+"   \"><button type=\"submit\" class=\"btn btn-primary buttons\">Deletar</button></form></div></div></div>"
+  }
+
 
 
 
@@ -117,10 +118,11 @@ function direita(indice) {
 
     <div class="container-sm ">  <div class="p-3 border bg-light inicial"><h1>Nome do artista</h1></div></div>
 
-<form action="/portfolio/envio" method="post" id="portfolio" >
-
+<form action="/portfolio/enviodesc" method="post" id="portfolio" >
+  <div class="mb-3" id="inserir">
+  </div>
     <div class="container-sm">
-      <div class="col-9"><div class="p-3 border bg-light inicial"><textarea class="form-control"  placeholder="Descrição" id="descricao" rows="4"></textarea></div></div>
+      <div class="col-9"><div class="p-3 border bg-light inicial"><textarea class="form-control"  placeholder="Descrição" id="descricao" name="descricao" rows="4"></textarea></div></div>
     </div>
 
     <div class="container ">
@@ -129,10 +131,10 @@ function direita(indice) {
        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 1" name="preco1"></div>
       </div>
       <div class="col-2">
-        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 2" name="preco1"></div>
+        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco2" placeholder="Preço 2" name="preco2"></div>
       </div>
       <div class="col-2">
-        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco1" placeholder="Preço 3" name="preco1"></div>
+        <div class="p-3 border Secondary preço"><input type="text" class="form-control" id="preco3" placeholder="Preço 3" name="preco3"></div>
       </div>
       <div class="col-2">
         <button type="submit" class="btn btn-primary buttons">Enviar</button>

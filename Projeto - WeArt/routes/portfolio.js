@@ -5,13 +5,17 @@ var bodyParser = require('body-parser')
 const dbsql = require("../bd/dbsql");
 
 
-
-
-
 router.get('/', function(req, res, next) {
 
 res.sendFile(path.join(__dirname, '/../views/', 'portfolio.html'))
 });
+
+router.post('/enviodesc', function(req, res, next) {
+
+  dbsql.updateportfolio(req.body.profid,{descricao: req.body.descricao, Preco1: req.body.preco1,Preco2: req.body.preco2,Preco3: req.body.preco3})
+  res.redirect("http://localhost:3000/portfolio")
+});
+
 
 router.post('/envio', function(req, res, next) {
 
