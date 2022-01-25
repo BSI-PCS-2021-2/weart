@@ -142,3 +142,9 @@
   margin-bottom:  20px;
 
 }
+.scroll
+{
+    height:150px;
+   overflow-y: scroll;
+
+}

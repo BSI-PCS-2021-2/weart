@@ -10,6 +10,14 @@ router.get('/dados/:id', function(req, res) {
       res.send(sql)
 
   })
+  });
+
+  router.get('/notas/:id', function(req, res) {
+    var sqlp = dbsql.selectavalia(req.params.id);
+    sqlp.then(sql => {
+        res.send(sql)
+
+    })
 
 
 
@@ -20,7 +28,10 @@ router.get('/dados/:id', function(req, res) {
 
 
 router.get('/:id', function(req, res) {
-
+console.log(req.session.passport.user)
+if(req.session.passport.user != undefined){
   res.sendFile(path.join(__dirname, '/../views/', 'profissional.html'))
+}
+else{res.redirect('http://localhost:3000/autenticacao')}
 });
 module.exports = router;

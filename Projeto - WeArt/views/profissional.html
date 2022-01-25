@@ -29,6 +29,35 @@ var myArr = link.split("/");
 
  };
     $(document).ready(function() {
+
+$.get('/profissional/notas/'+myArr[2], function(res) {
+
+
+
+  for(var i = 0; i < res.length; i++)
+  {
+console.log(res[i])
+let star="";
+if(res[i].nota==0.5){star='<i class="bi bi-star-half"></i>'}
+if(res[i].nota==1){star='<i class="bi bi-star-fill"></i>'}
+if(res[i].nota==1.5){star='<i class="bi bi-star-fill"><i class="bi bi-star-half"></i>'}
+if(res[i].nota==2){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>'}
+if(res[i].nota==2.5){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>'}
+if(res[i].nota==3){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>'}
+if(res[i].nota==3.5){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>'}
+if(res[i].nota==4){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>'}
+if(res[i].nota==4.5){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>'}
+if(res[i].nota==5){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>'}
+
+
+
+
+  document.getElementById("avs").innerHTML+='<li class="nav-item border">'+'<div class="col ">'+star+'</div><div class="col">'+res[i].avaliaçao+'</div><div class="col">'+res[i].dataPedido+'</div></li>'
+}
+})
+
+
+
       $.get('/sessao', function(res) {
 
 if(res.length>0){
@@ -138,7 +167,6 @@ function direita(indice) {
 
 
 
-
     <div class="container-sm ">  <div class="p-3 border bg-light inicial"><h1><div id="nome"></div></h1></div></div>
 
 
@@ -160,7 +188,14 @@ function direita(indice) {
       </div>
 
     </div>
+    <div class="container-sm  border bg-light inicial">
 
+      <div class=" col-">
+        <ul class="scroll " id="avs">
+
+          </ul>
+          </div>
+    </div>
 
     <div class="container-sm ">  <div class="p-3 border bg-light inicial">Projetos do artista</div></div>
 

@@ -100,12 +100,10 @@
         console.log(value);
 
     if (value == "boleto"){
-      document.getElementById("pag2").innerHTML="Digite um CPF no formato: xxx.xxx.xxx-xx <input type=\"text\" name=\"cpf\" \
-			pattern=\"\d{3}\.\d{3}\.\d{3}-\d{2}\" \
-			title=\"Digite um CPF no formato: xxx.xxx.xxx-xx\">";
+      document.getElementById("pag2").innerHTML='Digite um CPF no formato: xxx.xxx.xxx-xx <input type="text" name="cpf" pattern="(\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2})\" >';
     }
     if (value == "cartao"){
-      document.getElementById("pag2").innerHTML="<label for=\"ccn\">Número do cartão:</label><input id=\"ccn\" type=\"tel\" inputmode=\"numeric\" pattern=\"[0-9\s]{13,19}\" autocomplete=\"cc-number\" maxlength=\"19\" placeholder=\"xxxx xxxx xxxx xxxx\" name=\"cartao\">";
+      document.getElementById("pag2").innerHTML="<label for=\"ccn\">Número do cartão:</label><input id=\"ccn\" type=\"tel\" inputmode=\"numeric\" pattern=\"[0-9\\s]{13,19}\" autocomplete=\"cc-number\" maxlength=\"19\" placeholder=\"xxxx xxxx xxxx xxxx\" name=\"cartao\">";
 
     }
 

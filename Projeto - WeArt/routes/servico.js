@@ -26,7 +26,10 @@ res.sendFile(path.join(__dirname, '/../views/', 'servico.html'))
 
 });
 router.post('/fim', function(req, res, next) {
-  console.log(req.body)
+  let date = new Date();
+  dbsql.insertservico({clienteid: req.session.passport.user[0].clienteid ,profid: req.body.profid,preco: req.body.preco ,descricao: req.body.descricao, data: date})
+
+
 res.redirect("http://localhost:3000/")
 
 });
