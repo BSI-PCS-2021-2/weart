@@ -8,6 +8,8 @@ var vendasRouter = require('./routes/vendas');
 var comprasRouter = require('./routes/compras');
 var portfolioRouter = require('./routes/portfolio');
 var visualizarRouter = require('./routes/visualizar');
+var profissionalRouter = require('./routes/profissional');
+var servicoRouter = require('./routes/servico');
 
 
 const passport = require("passport");
@@ -50,6 +52,8 @@ app.use('/vendas', vendasRouter);
 app.use('/compras', comprasRouter);
 app.use('/portfolio', portfolioRouter);
 app.use('/visualizar', visualizarRouter);
+app.use('/profissional', profissionalRouter);
+app.use('/servico', servicoRouter);
 
   app.get('/data', (req, res) => {
     var sqlp = dbsql.selectallprof();

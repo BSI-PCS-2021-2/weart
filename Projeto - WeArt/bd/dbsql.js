@@ -95,6 +95,15 @@ async function selectprojetobyid(id){
     return rows;
 }
 
+async function selectprojetobyidprof(id){
+
+  var sql = 'SELECT * FROM cliente_profissional JOIN projeto ON projeto.profid=cliente_profissional.profid JOIN portfólio ON portfólio.profid=cliente_profissional.profid WHERE cliente_profissional.profid=?';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
+    return rows;
+}
+
 
 
 
@@ -168,6 +177,12 @@ async function insertprojeto(customer){
     const values = [customer.profid, customer.nome, customer.dataCriação, customer.imagens];
     return await conn.query(sql, values);
 }
+async function updateportfolio(profid, customer){
+    const conn = await connect();
+    const sql = 'UPDATE portfólio SET `Descrição`=?, `Preço1`=?, `Preço2`=?,`Preço3`=? WHERE profid=?';
+    const values = [customer.descricao, customer.Preco1, customer.Preco2, customer.Preco3,profid];
+    return await conn.query(sql, values);
+}
 
 async function insertCliente_profissional(customer){
     const conn = await connect();
@@ -175,7 +190,11 @@ async function insertCliente_profissional(customer){
     const values = [customer.clienteid, customer.tipoArte, customer.infoBancarias, customer.nomeArtistico];
     return await conn.query(sql, values);
 }
-
+async function insertportfolio(profid){
+    const conn = await connect();
+    const sql = 'INSERT INTO portfólio(`profid`,`Descrição`,`Preço1`,`Preço2`,`Preço3`) VALUES (?,null,null,null,null);';
+    return await conn.query(sql, [profid]);
+}
 
 
 async function updateclientes(clienteid, customer){
@@ -196,4 +215,4 @@ async function deleteprojeto(idProjeto){
     const sql = 'DELETE FROM projeto where idProjeto=?;';
     return await conn.query(sql, [idProjeto]);
 }
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfbiId}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfbiId,selectprojetobyidprof,updateportfolio,insertportfolio}

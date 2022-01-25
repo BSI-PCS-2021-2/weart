@@ -28,6 +28,7 @@ document.getElementById("cadastro").outerHTML = "";
       })
 
           $.get('/data', function(res) {
+console.log(res);
 
 for(var i = 0; i < res.length; i++)
 {
@@ -40,7 +41,7 @@ for(var i = 0; i < res.length; i++)
 
   }
   else{img_array.push(["http://localhost:3000/images/brand.jpg"])}
-document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"onclick="+"esquerda("+i+")"+"><i class="+"arrow"+"></i></button><img src=\""+img_array[i][0]+"\"class="+"imagem id="+"i"+i+"><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nomeArtistico+"</div></div></div>"
+document.getElementById("teste").innerHTML+="<div class=" + "col" + "><div class="+"\"p-3 border bg-light innerImg\""+"><button class="+"\"arrowButton left\""+"onclick="+"esquerda("+i+")"+"><i class="+"arrow"+"></i></button><a href=\"http://localhost:3000/profissional/"+res[i].profid+"\"><img src=\""+img_array[i][0]+"\"class="+"imagem id="+"i"+i+"><a/><button class="+"\"arrowButton right\""+"onclick="+"direita("+i+")"+" ><i class="+"arrow"+"></i></button><div class="+"innerGridText"+">"+res[i].nomeArtistico+"</div></div></div>"
 }
 
 
