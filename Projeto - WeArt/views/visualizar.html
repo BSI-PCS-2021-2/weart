@@ -11,6 +11,9 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <script>
+img_array=[];
+
+
     $(document).ready(function() {
 
 
@@ -35,6 +38,10 @@ document.getElementById("cadastro").outerHTML = "";
 
       })
     $.get('visualizar/dados', function(res) {
+      img_array=res[0].Imagem.split(" ");
+      img_array.pop();
+
+
 
 
       document.getElementById("numServiço").innerHTML+="<input type=\"hidden\" id=\"numServiço\" name=\"numServiço\" value=\"" + res[0].numServiço + "\">"
@@ -46,6 +53,23 @@ document.getElementById("cadastro").outerHTML = "";
 
   })
 });
+
+
+function baixar() {
+  console.log(img_array);
+    for(i=0;i<img_array.length;i++)
+    {
+      var link = document.createElement("a");
+      link.download = "arquivo"+i+".jpg";
+      link.href = img_array[0];
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      delete link;
+    }
+
+};
+
     </script>
 
     <title>Cadastro</title>
@@ -83,7 +107,7 @@ document.getElementById("cadastro").outerHTML = "";
 
 
         <div class=" justify-content-center">
-        <button type="submit" class="btn btn-secondary btn-lm">Baixar</button>
+        <button type="submit" onclick="baixar()" class="btn btn-secondary btn-lm">Baixar</button>
         </div>
 
         <div class=" justify-content-center" id="revb">

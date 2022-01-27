@@ -37,10 +37,12 @@ document.getElementById("cadastro").outerHTML = "";
 
       $.get('servico/dados', function(res) {
         console.log(res);
-
+          res.pacote
         document.getElementById("preco2").innerHTML+="<input type=\"hidden\" name=\"preco\" value="+res.preco+">";
     document.getElementById("nomeArtistico").innerHTML+=res.nomeArtistico;
     document.getElementById("preco").innerHTML+="R$ "+res.preco;
+    document.getElementById("pacote").innerHTML+=res.pacote;
+    document.getElementById("pacote2").innerHTML+="<input type=\"hidden\" name=\"pacote\" value="+res.pacote+">";
     document.getElementById("profid").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res.profid+">";
 
 
@@ -72,6 +74,7 @@ document.getElementById("cadastro").outerHTML = "";
   <form action="/servico/fim" method="post" id="servico" >
     <div id="profid"></div>
     <div id="preco2"></div>
+    <div id="pacote2"></div>
   <div class="row d-flex justify-content-center">
 
        <h1 class="display-6">Finalize sua Compra</h1>
@@ -81,7 +84,7 @@ document.getElementById("cadastro").outerHTML = "";
 
     <div class="row d-flex justify-content-center">
       <div class="col-6 border bg-light inicial">
-         <div class="loginText "><h1 class="display-6">Dados da Compra</h1><div id="nomeArtistico">Nome Artistico:</div><div id="preco">Preço: </div></div>
+         <div class="loginText "><h1 class="display-6">Dados da Compra</h1><div id="nomeArtistico">Nome Artistico:</div><div id="preco">Preço: </div><div id="pacote">Pacote: </div></div>
       </div>
       <div class="col-6 border bg-light inicial">
         <div class="loginText "><h1 class="display-6">Descreva seu pedido</h1><textarea class="form-control"  placeholder="Descrição" id="descricao" name="descricao" rows="4"></textarea></div>

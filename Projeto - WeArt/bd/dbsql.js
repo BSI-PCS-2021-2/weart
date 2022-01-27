@@ -189,8 +189,8 @@ async function insertportfolio(profid){
 }
 async function insertservico(customer){
     const conn = await connect();
-    const sql = 'INSERT INTO servico(clienteid,profid,descrição,preço,dataPedido,numRevisões,revisão,statusServiço) VALUES (?,?,?,?,?,3,1,"Aguardando pagamento");';
-    const values = [customer.clienteid, customer.profid, customer.descricao, customer.preco, customer.data];
+    const sql = 'INSERT INTO servico(clienteid,profid,descrição,preço,pacote,dataPedido,numRevisões,revisão,statusServiço) VALUES (?,?,?,?,?,?,3,1,"Aguardando pagamento");';
+    const values = [customer.clienteid, customer.profid, customer.descricao, customer.preco,customer.pacote, customer.data];
     return await conn.query(sql, values);
 }
 
@@ -215,7 +215,12 @@ async function finalizaservico(numServiço){
 }
 
 
-
+async function updateserviço(profid, imagem){
+    const conn = await connect();
+    const sql = 'UPDATE servico SET `Imagem`=?,statusServiço="concluido" WHERE numServiço=?';
+    const [rows] = await conn.query(sql, [profid,imagem], function(err, rows, fields) {});
+    return rows;
+}
 
 
 async function updateportfolio(profid, customer){
@@ -243,4 +248,4 @@ async function deleteprojeto(idProjeto){
     const sql = 'DELETE FROM projeto where idProjeto=?;';
     return await conn.query(sql, [idProjeto]);
 }
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia,updateserviço}

@@ -31,12 +31,14 @@ var myArr = link.split("/");
     $(document).ready(function() {
 
 $.get('/profissional/notas/'+myArr[2], function(res) {
-
-
+var media=0
+var valores= res.length
+console.log(res.length)
 
   for(var i = 0; i < res.length; i++)
   {
-console.log(res[i])
+    media=media+res[i].nota
+
 let star="";
 if(res[i].nota==0.5){star='<i class="bi bi-star-half"></i>'}
 if(res[i].nota==1){star='<i class="bi bi-star-fill"></i>'}
@@ -54,6 +56,10 @@ if(res[i].nota==5){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fil
 
   document.getElementById("avs").innerHTML+='<li class="nav-item border">'+'<div class="col ">'+star+'</div><div class="col">'+res[i].avaliaçao+'</div><div class="col">'+res[i].dataPedido+'</div></li>'
 }
+
+media=media/valores
+document.getElementById("not").innerHTML+="Nota geral: "+media+" de "+valores+ " avaliações "
+
 })
 
 
@@ -90,25 +96,31 @@ console.log(res)
 
 document.getElementById("nome").innerHTML = res[0].nomeArtistico;;
 document.getElementById("desc").innerHTML = res[0].Descrição;
-document.getElementById("preco1").innerHTML ="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"nomeArtistico\" value="+
+if(res[0].Preço1!=null){
+document.getElementById("preco1").innerHTML +="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"pacote\" value=\"Básico\"><input type=\"hidden\" name=\"nomeArtistico\" value="+
 res[0].nomeArtistico+"><input type=\"hidden\" name=\"preco\" value="+
 res[0].Preço1+"><input type=\"hidden\" name=\"profid\" value="+
 res[0].profid+"><button class=\"btn\" type=\"submit\"><div class=\"p-3 border Secondary inicial \">R$: "+
 res[0].Preço1+"</div></button></form>"
 ;
-
-document.getElementById("preco2").innerHTML ="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"nomeArtistico\" value="+
+}
+if(res[0].Preço2!=null){
+document.getElementById("preco2").innerHTML +="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"pacote\" value=\"Intermediário\"><input type=\"hidden\" name=\"nomeArtistico\" value="+
 res[0].nomeArtistico+"><input type=\"hidden\" name=\"preco\" value="+
 res[0].Preço2+"><input type=\"hidden\" name=\"profid\" value="+
 res[0].profid+"><button class=\"btn\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">R$: "+
  res[0].Preço2 +"</div></button></form>"
  ;
-document.getElementById("preco3").innerHTML ="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"nomeArtistico\" value="+
+ }
+
+ if(res[0].Preço2!=null){
+document.getElementById("preco3").innerHTML +="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"pacote\" value=\"Premium\"><input type=\"hidden\" name=\"nomeArtistico\" value="+
 res[0].nomeArtistico+"><input type=\"hidden\" name=\"preco\" value="+
 res[0].Preço3+"><input type=\"hidden\" name=\"profid\" value="+
 res[0].profid+"><button class=\"btn\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">R$: "+
 res[0].Preço3 +"</div></button></form>"
 ;
+}
 });
 
 $.get('/profissional/dados/'+myArr[2], function(res) {
@@ -188,11 +200,30 @@ function direita(indice) {
     </div>
 
 
+
+    <div class="row d-flex justify-content-center rotulo">
+      <div class="col-2 ">
+            <p>Básico</p>
+
+      </div>
+      <div class="col-2 ">
+
+            <p>Intermediário</p>
+      </div>
+      <div class="col-2 ">
+          <p>Premiun</p>
+      </div>
+
+    </div>
+
+
     <div class="row d-flex justify-content-center">
-      <div class="col-2">
-       <div id="preco1"></div>
+      <div class="col-2 ">
+
+       <div id="preco1"> </div>
       </div>
       <div class="col-2">
+
         <div id="preco2"></div>
       </div>
       <div class="col-2">
@@ -201,7 +232,9 @@ function direita(indice) {
 
     </div>
     <div class="container-sm  border bg-light inicial">
+        <div class=" col-" id="not">
 
+          </div>
       <div class=" col-">
         <ul class="scroll " id="avs">
 
