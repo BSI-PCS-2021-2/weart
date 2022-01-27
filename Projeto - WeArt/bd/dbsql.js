@@ -54,7 +54,7 @@ async function checacompras(id){
 }
 
 
-async function selectclienteProfbiId(id){
+async function selectclienteProfById(id){
 
   var sql = 'SELECT * FROM cliente_profissional WHERE cliente_profissional.clienteid=?';
 
@@ -97,7 +97,15 @@ async function selectprojetobyid(id){
 
 async function selectprojetobyidprof(id){
 
-  var sql = 'SELECT * FROM cliente_profissional JOIN projeto ON projeto.profid=cliente_profissional.profid JOIN portfólio ON portfólio.profid=cliente_profissional.profid WHERE cliente_profissional.profid=?';
+  var sql = 'SELECT * FROM cliente_profissional JOIN projeto ON projeto.profid=cliente_profissional.profid WHERE cliente_profissional.profid=?';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
+    return rows;
+}
+async function selectportfoliobyidprof(id){
+
+  var sql = 'SELECT * FROM cliente_profissional  JOIN portfólio ON portfólio.profid=cliente_profissional.profid WHERE cliente_profissional.profid=?';
 
     const conn = await connect();
     const [rows] = await conn.query(sql, [id], function(err, rows, fields) {});
@@ -235,4 +243,4 @@ async function deleteprojeto(idProjeto){
     const sql = 'DELETE FROM projeto where idProjeto=?;';
     return await conn.query(sql, [idProjeto]);
 }
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfbiId,selectprojetobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia}

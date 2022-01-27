@@ -96,12 +96,13 @@ app.use('/servico', servicoRouter);
 
   });
   app.get('/prof', (req, res) => {
-
-    var sqlp = dbsql.selectclienteProfbiId(req.session.passport.user[0].clienteid);
+if(req.session.passport.user != undefined){
+    var sqlp = dbsql.selectclienteProfById(req.session.passport.user[0].clienteid);
     sqlp.then(sql => {
         res.send(sql)
 
     })
+  }
   });
 
 

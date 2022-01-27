@@ -58,19 +58,30 @@ if(res[i].nota==5){star='<i class="bi bi-star-fill"></i><i class="bi bi-star-fil
 
 
 
-      $.get('/sessao', function(res) {
-
-if(res.length>0){
-document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
-document.getElementById("login").outerHTML = "";
-document.getElementById("cadastro").outerHTML = "";
-}
+$.get('/prof', function(res) {
+  if(res[0] != undefined){
+    document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>"
+  }
+  else
+    document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/validacao\">Validação</a>"
 })
 
 
 
+$.get('/sessao', function(res) {
 
-$.get('/profissional/dados/'+myArr[2], function(res) {
+if(res.length>0){
+document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>"  + "<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
+document.getElementById("login").outerHTML = "";
+document.getElementById("cadastro").outerHTML = "";
+}
+
+
+})
+
+
+
+$.get('/profissional/dados2/'+myArr[2], function(res) {
 
 console.log(res)
 
@@ -98,8 +109,9 @@ res[0].Preço3+"><input type=\"hidden\" name=\"profid\" value="+
 res[0].profid+"><button class=\"btn\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">R$: "+
 res[0].Preço3 +"</div></button></form>"
 ;
+});
 
-
+$.get('/profissional/dados/'+myArr[2], function(res) {
 for(var i = 0; i < res.length; i++)
 {
 

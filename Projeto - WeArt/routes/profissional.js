@@ -12,6 +12,14 @@ router.get('/dados/:id', function(req, res) {
   })
   });
 
+router.get('/dados2/:id', function(req, res) {
+    var sqlp = dbsql.selectportfoliobyidprof(req.params.id);
+    sqlp.then(sql => {
+        res.send(sql)
+
+    })
+    });
+
   router.get('/notas/:id', function(req, res) {
     var sqlp = dbsql.selectavalia(req.params.id);
     sqlp.then(sql => {

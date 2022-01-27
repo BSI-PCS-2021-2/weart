@@ -26,7 +26,7 @@ if(req.body.idade!="" && req.body.Email!="" && req.body.nome!="" && req.body.inf
   res.redirect("http://localhost:3000/")}
 }
 else{
-  
+
   res.redirect("http://localhost:3000/cadastro")
 }
 
