@@ -37,7 +37,7 @@ router.get('/dados2/:id', function(req, res) {
 
 router.get('/:id', function(req, res) {
 
-if(req.session.passport != undefined){
+if(req.session.passport.user != undefined){
   res.sendFile(path.join(__dirname, '/../views/', 'profissional.html'))
 }
 else{res.redirect('http://localhost:3000/autenticacao')}
