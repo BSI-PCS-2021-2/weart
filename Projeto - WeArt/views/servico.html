@@ -14,21 +14,35 @@
     $(document).ready(function() {
 
 
+      $.get('/prof', function(res) {
+        if(res[0] != undefined){
+          document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>"
+        }
+        else
+          document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/validacao\">Validação</a>"
+      })
+
+
+
       $.get('/sessao', function(res) {
 
-    if(res.length>0){
-    document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
-    document.getElementById("login").outerHTML = "";
-    document.getElementById("cadastro").outerHTML = "";
-    }
-    })
+if(res.length>0){
+document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>"  + "<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
+document.getElementById("login").outerHTML = "";
+document.getElementById("cadastro").outerHTML = "";
+}
+
+
+      })
 
       $.get('servico/dados', function(res) {
         console.log(res);
-
+          res.pacote
         document.getElementById("preco2").innerHTML+="<input type=\"hidden\" name=\"preco\" value="+res.preco+">";
     document.getElementById("nomeArtistico").innerHTML+=res.nomeArtistico;
     document.getElementById("preco").innerHTML+="R$ "+res.preco;
+    document.getElementById("pacote").innerHTML+=res.pacote;
+    document.getElementById("pacote2").innerHTML+="<input type=\"hidden\" name=\"pacote\" value="+res.pacote+">";
     document.getElementById("profid").innerHTML+="<input type=\"hidden\" name=\"profid\" value="+res.profid+">";
 
 
@@ -60,6 +74,7 @@
   <form action="/servico/fim" method="post" id="servico" >
     <div id="profid"></div>
     <div id="preco2"></div>
+    <div id="pacote2"></div>
   <div class="row d-flex justify-content-center">
 
        <h1 class="display-6">Finalize sua Compra</h1>
@@ -69,7 +84,7 @@
 
     <div class="row d-flex justify-content-center">
       <div class="col-6 border bg-light inicial">
-         <div class="loginText "><h1 class="display-6">Dados da Compra</h1><div id="nomeArtistico">Nome Artistico:</div><div id="preco">Preço: </div></div>
+         <div class="loginText "><h1 class="display-6">Dados da Compra</h1><div id="nomeArtistico">Nome Artistico:</div><div id="preco">Preço: </div><div id="pacote">Pacote: </div></div>
       </div>
       <div class="col-6 border bg-light inicial">
         <div class="loginText "><h1 class="display-6">Descreva seu pedido</h1><textarea class="form-control"  placeholder="Descrição" id="descricao" name="descricao" rows="4"></textarea></div>
@@ -100,12 +115,10 @@
         console.log(value);
 
     if (value == "boleto"){
-      document.getElementById("pag2").innerHTML="Digite um CPF no formato: xxx.xxx.xxx-xx <input type=\"text\" name=\"cpf\" \
-			pattern=\"\d{3}\.\d{3}\.\d{3}-\d{2}\" \
-			title=\"Digite um CPF no formato: xxx.xxx.xxx-xx\">";
+      document.getElementById("pag2").innerHTML='Digite um CPF no formato: xxx.xxx.xxx-xx <input type="text" name="cpf" pattern="(\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2})\" >';
     }
     if (value == "cartao"){
-      document.getElementById("pag2").innerHTML="<label for=\"ccn\">Número do cartão:</label><input id=\"ccn\" type=\"tel\" inputmode=\"numeric\" pattern=\"[0-9\s]{13,19}\" autocomplete=\"cc-number\" maxlength=\"19\" placeholder=\"xxxx xxxx xxxx xxxx\" name=\"cartao\">";
+      document.getElementById("pag2").innerHTML="<label for=\"ccn\">Número do cartão:</label><input id=\"ccn\" type=\"tel\" inputmode=\"numeric\" pattern=\"[0-9\\s]{13,19}\" autocomplete=\"cc-number\" maxlength=\"19\" placeholder=\"xxxx xxxx xxxx xxxx\" name=\"cartao\">";
 
     }
 

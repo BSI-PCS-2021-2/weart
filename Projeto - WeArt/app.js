@@ -79,7 +79,12 @@ app.use('/servico', servicoRouter);
 
     })
   });
-
+  app.get('/datav/:id', function(req, res, next) {
+    var sqlp = dbsql.selectrevisao(req.params.id);
+    sqlp.then(sql => {
+        res.send(sql)
+    })
+  });
 
   app.get('/dataprojeto', (req, res) => {
     var sqlp = dbsql.selectprojetobyid(req.session.passport.user[0].clienteid);
@@ -96,12 +101,13 @@ app.use('/servico', servicoRouter);
 
   });
   app.get('/prof', (req, res) => {
-
-    var sqlp = dbsql.selectclienteProfbiId(req.session.passport.user[0].clienteid);
+if(req.session.passport.user != undefined){
+    var sqlp = dbsql.selectclienteProfById(req.session.passport.user[0].clienteid);
     sqlp.then(sql => {
         res.send(sql)
 
     })
+  }
   });
 
 

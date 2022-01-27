@@ -16,13 +16,25 @@
 
 
     $(document).ready(function() {
+
+
+      $.get('/prof', function(res) {
+        if(res[0] != undefined){
+          document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>"
+        }
+        else
+          document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/validacao\">Validação</a>"
+      })
+
+
+
       $.get('/sessao', function(res) {
 
-if(res.length>0){
-document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/portfolio\">Portfólio</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>" + "<a class=\"nav-link\" href=\"http://localhost:3000/vendas\">Vendas</a>" +"<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
-document.getElementById("login").outerHTML = "";
-document.getElementById("cadastro").outerHTML = "";
-}
+  if(res.length>0){
+  document.getElementById("links").innerHTML+="<a class=\"nav-link\" href=\"http://localhost:3000/compras\">Compras</a>"  + "<a class=\"nav-link\" href=\"http://localhost:3000/autenticacao/logout\">Logout</a>"
+  document.getElementById("login").outerHTML = "";
+  document.getElementById("cadastro").outerHTML = "";
+  }
 
 
       })

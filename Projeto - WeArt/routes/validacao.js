@@ -17,7 +17,10 @@ router.post('/envio', function(req, res, next) {
 
 
   if(req.body.tipoArte!="" && req.body.infoBancarias!=""){
-    var inserta= dbsql.insertCliente_profissional({clienteid: id.id,tipoArte: req.body.tipoArte,infoBancarias: req.body.infoBancarias,nomeArtistico: req.body.nomeArtistico})
+    var idc=id.id;
+if(req.session.passport.user != undefined){
+    var idc=req.session.passport.user[0].clienteid;}
+    var inserta= dbsql.insertCliente_profissional({clienteid: idc,tipoArte: req.body.tipoArte,infoBancarias: req.body.infoBancarias,nomeArtistico: req.body.nomeArtistico})
 
     inserta.then(inser => {
     dbsql.insertportfolio(inser[0].insertId)
