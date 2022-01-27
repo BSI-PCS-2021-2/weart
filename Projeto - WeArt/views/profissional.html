@@ -100,7 +100,7 @@ if(res[0].Preço1!=null){
 document.getElementById("preco1").innerHTML +="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"pacote\" value=\"Básico\"><input type=\"hidden\" name=\"nomeArtistico\" value="+
 res[0].nomeArtistico+"><input type=\"hidden\" name=\"preco\" value="+
 res[0].Preço1+"><input type=\"hidden\" name=\"profid\" value="+
-res[0].profid+"><button class=\"btn\" type=\"submit\"><div class=\"p-3 border Secondary inicial \">R$: "+
+res[0].profid+"><button class=\"btn preco\" type=\"submit\"><div class=\"p-3 border Secondary inicial \">Básico <br>R$: "+
 res[0].Preço1+"</div></button></form>"
 ;
 }
@@ -108,7 +108,7 @@ if(res[0].Preço2!=null){
 document.getElementById("preco2").innerHTML +="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"pacote\" value=\"Intermediário\"><input type=\"hidden\" name=\"nomeArtistico\" value="+
 res[0].nomeArtistico+"><input type=\"hidden\" name=\"preco\" value="+
 res[0].Preço2+"><input type=\"hidden\" name=\"profid\" value="+
-res[0].profid+"><button class=\"btn\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">R$: "+
+res[0].profid+"><button class=\"btn preco\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">Intermediário <br>R$: "+
  res[0].Preço2 +"</div></button></form>"
  ;
  }
@@ -117,7 +117,7 @@ res[0].profid+"><button class=\"btn\" type=\"submit\" ><div class=\"p-3 border S
 document.getElementById("preco3").innerHTML +="<form action=\"/servico\" method=\"post\" id=\"servico\" ><input type=\"hidden\" name=\"pacote\" value=\"Premium\"><input type=\"hidden\" name=\"nomeArtistico\" value="+
 res[0].nomeArtistico+"><input type=\"hidden\" name=\"preco\" value="+
 res[0].Preço3+"><input type=\"hidden\" name=\"profid\" value="+
-res[0].profid+"><button class=\"btn\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">R$: "+
+res[0].profid+"><button class=\"btn preco\" type=\"submit\" ><div class=\"p-3 border Secondary inicial \">Premium <br> R$: "+
 res[0].Preço3 +"</div></button></form>"
 ;
 }
@@ -196,25 +196,12 @@ function direita(indice) {
 
 
     <div class="container-sm d-flex justify-content-center">
-      <div class="col-9"><div class="p-3 border bg-light inicial"><div id="desc"></div></div></div>
+      <div class="col-9"><div class="p-3 border bg-light inicial">Descrição<div class="border"id="desc"></div></div></div>
     </div>
 
 
 
-    <div class="row d-flex justify-content-center rotulo">
-      <div class="col-2 ">
-            <p>Básico</p>
 
-      </div>
-      <div class="col-2 ">
-
-            <p>Intermediário</p>
-      </div>
-      <div class="col-2 ">
-          <p>Premiun</p>
-      </div>
-
-    </div>
 
 
     <div class="row d-flex justify-content-center">
