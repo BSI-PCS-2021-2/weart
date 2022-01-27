@@ -112,7 +112,14 @@ async function selectportfoliobyidprof(id){
     return rows;
 }
 
+async function selectrevisao(numServiço){
 
+  var sql = 'SELECT * FROM revisão WHERE revisão.`numServiço`=?';
+
+    const conn = await connect();
+    const [rows] = await conn.query(sql,[numServiço], function(err, rows, fields) {});
+    return rows;
+}
 
 
 async function checaclientelogin(login){
@@ -248,4 +255,4 @@ async function deleteprojeto(idProjeto){
     const sql = 'DELETE FROM projeto where idProjeto=?;';
     return await conn.query(sql, [idProjeto]);
 }
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia,updateserviço}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia,updateserviço,selectrevisao}

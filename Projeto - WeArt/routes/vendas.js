@@ -10,6 +10,8 @@ router.get('/', function(req, res, next) {
 res.sendFile(path.join(__dirname, '/../views/', 'vendas.html'))
 });
 
+
+
 router.post('/envio', function(req, res, next) {
 
   const multer = require('multer');
@@ -43,7 +45,7 @@ router.post('/envio', function(req, res, next) {
                     }
 
               var sqlp2 = dbsql.updateserviço(imageurl,req.body.numServiço);
-              
+
               sqlp2.then(sql2 => {
 
                   console.log(sql2)
