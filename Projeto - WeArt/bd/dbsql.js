@@ -124,7 +124,7 @@ async function selectrevisao(numServiço){
 
 async function checaclientelogin(login){
 
-  var sql = 'SELECT * FROM cliente WHERE email =? LIMIT 1';
+  var sql = 'SELECT * FROM cliente WHERE email =? limit 1';
 
     const conn = await connect();
     const [rows] = await conn.query(sql,[login], function(err, rows, fields) {});
@@ -200,7 +200,12 @@ async function insertservico(customer){
     const values = [customer.clienteid, customer.profid, customer.descricao, customer.preco,customer.pacote, customer.data];
     return await conn.query(sql, values);
 }
-
+async function insertservicoGoogle(customer){
+    const conn = await connect();
+    const sql = 'INSERT INTO servico(clienteid,profid,descrição,preço,pacote,dataPedido,numRevisões,revisão,statusServiço,clienteGoogle) VALUES (null,?,?,?,?,?,3,1,"Aguardando pagamento",?);';
+    const values = [customer.profid, customer.descricao, customer.preco,customer.pacote, customer.data,customer.clienteGoogle];
+    return await conn.query(sql, values);
+}
 
 
 async function diminuirevisao(numServiço){
@@ -255,4 +260,4 @@ async function deleteprojeto(idProjeto){
     const sql = 'DELETE FROM projeto where idProjeto=?;';
     return await conn.query(sql, [idProjeto]);
 }
-module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia,updateserviço,selectrevisao}
+module.exports = {selectclientes, insertclientes, updateclientes, deleteclientes, checalogin, insertCliente_profissional, selectclientesJoinProf,checaclientelogin,checaclienteid,checacompras,checavendas,checacomprasterminada,insererevisao,insereavaliacao,diminuirevisao,finalizaservico,insertprojeto,selectprojetobyid,deleteprojeto,selectallprof,selectclienteProfById,selectprojetobyidprof,selectportfoliobyidprof,updateportfolio,insertportfolio,insertservico,selectavalia,updateserviço,selectrevisao,insertservicoGoogle}

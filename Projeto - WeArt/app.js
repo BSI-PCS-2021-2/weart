@@ -38,6 +38,18 @@ app.use(session({
   cookie: { maxAge: 30 * 60 * 1000 }//30min
 }))
 app.use(passport.initialize());
+require('./config/googleauten');
+app.get('/google',
+  passport.authenticate('google', { scope: ['profile','email'] }));
+
+app.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/google' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
 app.use(passport.session());
 
 

@@ -8,6 +8,7 @@ const dbsql = require("../bd/dbsql");
 
 
 router.post('/', function(req, res, next) {
+
   var iduser= req.session.passport.user[0].clienteid;
   var nserviço= req.body.numero;
   router.get('/dados', (req, res) => {
