@@ -3,7 +3,10 @@ var router = express.Router();
 var path = require('path');
 var bodyParser = require('body-parser')
 const dbsql = require("../bd/dbsql");
-
+const { ImgurClient } = require('imgur')
+const fs = require('fs')
+const fileUpload = require('express-fileupload')
+const client = new ImgurClient({ clientId: '8f9c0238936fa87' })
 
 router.get('/', function(req, res, next) {
 
@@ -17,7 +20,7 @@ router.post('/enviodesc', function(req, res, next) {
 });
 
 
-router.post('/envio', function(req, res, next) {
+router.post('/envio', async function(req, res, next) {
 
   const multer = require('multer');
 
@@ -33,7 +36,7 @@ router.post('/envio', function(req, res, next) {
   const parser = multer({ storage: storage })
 
 
-      parser.array('photos', 12)(req, res, err => {
+      parser.array('photos', 12)(req, res, err =>  {
 
         //insertprojeto
         //data
@@ -43,17 +46,35 @@ router.post('/envio', function(req, res, next) {
           else {
 
             var  imageurl=""
-
-              for (let i = 0; i < req.files.length; i++) {
+            var  count=0;
+              for (let i = 0; i < req.files.length;i++) {
                 var imageid = req.files[i].filename;
-               imageurl += `uploads/` +imageid+" ";
-                    }
-                    
-              var sqlp2 = dbsql.insertprojeto({profid: req.body.profid,nome: req.body.nome,data: req.body.data,imagens: imageurl});
-              sqlp2.then(sql2 => {
+                var localurl =`public/uploads/` +imageid;
 
-                  console.log(sql2)
-                   })
+
+
+               const response =  client.upload({
+                  image: fs.createReadStream(localurl),
+                  type: 'stream',
+                  });
+
+               response.then(resp => {
+                 imageurl += resp.data.link+" ";
+                   
+                   count++
+                   if(count==req.files.length){
+                     var sqlp2 = dbsql.insertprojeto({profid: req.body.profid,nome: req.body.nome,data: req.body.data,imagens: imageurl});
+                     sqlp2.then(sql2 => {
+
+                       console.log(sql2)
+
+                          })
+
+                   }
+               })
+             }
+
+
 
               res.redirect("http://localhost:3000/portfolio")
           }
